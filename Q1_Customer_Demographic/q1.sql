@@ -1,6 +1,6 @@
 /*
 Q1: Create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd, preference to receive receive e-mail promotions)
-Extract attributes from table Person.person, Person.EmailAddress, Person.Personphone, HumanResources.employee
+Extract attributes from table Person.person, Person.EmailAddress, Person.Personphone, HumanResources.employee, Purchasing.Vendor
 using column 'BusinessEntityId' as key
 */
 
@@ -18,8 +18,11 @@ with customer as (
 	on p.BusinessEntityID = e.BusinessEntityID
 	left join person.personphone pp
 	on p.BusinessEntityID = pp.BusinessEntityID
-	where em.loginid is null) 
+	left join Purchasing.Vendor v
+	on p.businessentityid = v.businessentityid
+	
+	--To exclude those that are employee / vendor 
+	where em.businessentityid is null and v.businessentityid is null) 
 	
 select * from customer
-where TotalPurchaseYTD > 0
 order by TotalPurchaseYTD desc;
