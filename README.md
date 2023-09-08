@@ -70,7 +70,7 @@ Using the Civis platform, two imports kicked off the daily scheduled updating of
 
 The workhorse query of this process is the va02_event_participant_moded query which adds the transforms the base event participant list int the following ways:
 
-- Adds the turfed Field Organizer (from the organizing region import) to each VAN ID entry
+- Q1: create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd)
 - Adds the latest Field Organizer who *recruited* that particular VAN ID
 - Adds a scheduled boolean value (whether or not that VAN ID is scheduled for a future event)
 - Adds total completed shifts over the course of the cycle (not currently utilized in report)
