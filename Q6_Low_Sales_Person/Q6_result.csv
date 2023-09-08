@@ -1,0 +1,11 @@
+"nationalidnumber","salesquota","salesytd","saleslastyear","netprofitmet","businessentityid","birthdate","jobtitle","maritalstatus","gender","salariedflag","vacationhours","sickleavehours","currentflag"
+"481044938",NULL,"172524.4512","0",NULL,285,"1975-01-11","Pacific Sales Manager","M","M",True,20,30,True
+"982310417",NULL,"519905.932","0",NULL,287,"1957-09-20","European Sales Manager","M","F",True,21,30,True
+"502097814",NULL,"559697.5639","0",NULL,274,"1951-10-17","North American Sales Manager","M","M",True,14,27,True
+"61161660","250000","1352577.1325","1927059.178","242500.00",280,"1974-12-06","Sales Representative","S","F",True,22,31,True
+"758596752","250000","1421810.9242","2278548.9776","239850.000",286,"1977-02-14","Sales Representative","S","F",True,36,38,True
+"234474252","250000","1453719.4653","1620276.8966","247000.00",278,"1975-02-04","Sales Representative","M","M",True,33,36,True
+"987554265","250000","1573012.9383","1371635.3158","243500.000",283,"1974-02-11","Sales Representative","S","M",True,23,31,True
+"90836195","300000","1576562.1966","0","290400.000",284,"1978-01-05","Sales Representative","M","M",True,39,39,True
+"954276278","250000","1827066.7118","1307949.7917","245425.000",288,"1975-07-09","Sales Representative","S","F",True,35,37,True
+"716374314","300000","2315185.611","1849640.9418","290300.00",279,"1974-01-18","Sales Representative","M","M",True,29,34,True
