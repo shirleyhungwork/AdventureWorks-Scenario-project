@@ -77,8 +77,8 @@ The process for building this report was as follows (and can be viewed in the ya
   
 - Q3:
 - Q4:
-- Q5: List top 10 sales person's demographic having highest growth in sales comparing to last year and calculate the projected net profit received by company if sales person meets the sales quota after excluding commission and bonus.
-- Q6:
+- Q5: List top 5 sales person's demographic having **highest** growth in sales comparing to last year and calculate the projected net profit received by company if sales person meets the sales quota after excluding commission and bonus.
+- Q6: List top 5 sales person's demographic having **lowest** growth in sales comparing to last year and calculate the projected net profit received by company if sales person meets the sales quota after excluding commission and bonus.
 - Q7:
 
 Next, the set_current_status query checks all vanids for how many events they've completed in the last 14 and 30 days, and assigns a status based on the count. Currently it is set up as follows:
