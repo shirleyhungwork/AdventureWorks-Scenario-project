@@ -6,7 +6,7 @@ and calculate the projected net profit received by company if sales person meets
 with topsales as (select salesquota, salesytd, saleslastyear,
 (salesquota*(1-commissionpct)-bonus) as NetProfitMet, businessentityid
 from sales.salesperson
-order by salesytd desc limit 10)
+order by salesytd desc limit 5)
 
 select e.NationalIDNumber, t.*, e.birthdate, e.jobtitle, e.maritalstatus, e.gender, e.salariedflag, e.vacationhours, e.sickleavehours, e.currentflag
 from humanresources.employee e left join topsales t
