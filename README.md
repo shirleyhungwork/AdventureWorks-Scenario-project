@@ -10,42 +10,52 @@ AdventureWorks is a sample database provided by Microsoft SQL Server, which supp
 ## People Scenario Tables (Schema "Person")
 This schema consists of names and addresses of individual customers, vendors, and employees. There are 13 tables in this schema:
 
-1.		Person.Address
-2.		Person.AddressType
-3.		Person.BusinessEntity
-4.		Person.BusinessEntityAddress
-5.		Person.BusinessEntityContact
-6.		Person.ContactType
-7.		Person.CountryRegion
-8.		Person.EmailAddress
-9.		Person.Password
-10.		Person.Person
-11.		Person.PersonPhone
-12.		Person.PhoneNumberType
-13.		Person.StateProvince
+- Person.Address
+- Person.AddressType
+- Person.BusinessEntity
+- Person.BusinessEntityAddress
+- Person.BusinessEntityContact
+- Person.ContactType
+- Person.CountryRegion
+- Person.EmailAddress
+- Person.Password
+- Person.Person
+- Person.PersonPhone
+- Person.PhoneNumberType
+- Person.StateProvince
+
+Entity Relationship diagram is shown below:
+<p align="center">
+  <img src="ERD/People.jpg" alt="Image" width="600">
+</p>
 
 ## Sales Scenario Tables (Schema "Sales")
 This schema contains information about shopping cart, sales orders, special offers and sales people. There are 19 tables in this schema:
 
-1.		Sales.CountryRegionCurrency
-2.		Sales.CreditCard
-3.		Sales.Currency
-4.		Sales.CurrencyRate
-5.		Sales.Customer
-6.		Sales.PersonCreditCard
-7.		Sales.SalesOrderDetail
-8.		Sales.SalesOrderHeader
-9.		Sales.SalesOrderHeaderSalesReason
-10.		Sales.SalesPerson
-11.		Sales.SalesPersonQuotaHistory
-12.		Sales.SalesReason
-13.		Sales.SalesTaxRate
-14.		Sales.SalesTerritory
-15.		Sales.SalesTerritoryHistory
-16.		Sales.ShoppingCartItem
-17.		Sales.SpecialOffer
-18.		Sales.SpecialOfferProduct
-19.		Sales.Store
+- Sales.CountryRegionCurrency
+- Sales.CreditCard
+- Sales.Currency
+- Sales.CurrencyRate
+- Sales.Customer
+- Sales.PersonCreditCard
+- Sales.SalesOrderDetail
+- Sales.SalesOrderHeader
+- Sales.SalesOrderHeaderSalesReason
+- Sales.SalesPerson
+- Sales.SalesPersonQuotaHistory
+- Sales.SalesReason
+- Sales.SalesTaxRate
+- Sales.SalesTerritory
+- Sales.SalesTerritoryHistory
+- Sales.ShoppingCartItem
+- Sales.SpecialOffer
+- Sales.SpecialOfferProduct
+- Sales.Store
+
+Entity Relationship diagram is shown below:
+<p align="center">
+  <img src="ERD/Sales.jpg" alt="Image" width="600">
+</p>
 
 ## The Workflow
 
