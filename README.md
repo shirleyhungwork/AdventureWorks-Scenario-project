@@ -5,7 +5,7 @@
 
 ## Introduction
 
-AdventureWorks is a sample database provided by Microsoft SQL Server, which supports standard online transaction processing scenarios for Adventure Works Cycles, a fictitious bicycle manufacturer that produces and sells metal and composite bicycles to worldwide. There are a total of 68 tables in the sample database constituted by 9 scenarios (i.e. Business Entities, People, Human Resources, Products, Manufacturing, Purchasing, Inventory, Sales, and Admin). Knowing that customers' demographic and sales-related information are crucial for driving business strategy in real life, this project aims to implement SQL querying techniques in PostgreSQL to explore, manipulate data in "People" and "Sales" scenarios, and transform it into useful business report.
+AdventureWorks is a sample database provided by Microsoft SQL Server, which supports standard online transaction processing scenarios for Adventure Works Cycles, a fictitious bicycle manufacturer that produces and sells metal and composite bicycles to worldwide. There are a total of 68 tables in the sample database constituted by 9 scenarios (i.e. Business Entities, People, Human Resources, Products, Manufacturing, Purchasing, Inventory, Sales, and Admin). Knowing that customers' demographic and sales-related information are crucial for driving business strategy in real life, this project aims to implement SQL querying techniques in PostgreSQL to explore, manipulate data majorly in "People" and "Sales" scenarios, and transform it into useful data for business report.
 
 ## People Scenario Tables (Schema "Person")
 This schema consists of names and addresses of individual customers, vendors, and employees. There are 13 tables in this schema:
@@ -62,21 +62,19 @@ Entity Relationship diagram is shown below:
 The process for building this report was as follows (and can be viewed in the yaml file in the repo):
 
 
-#### Imports
-
-Using the Civis platform, two imports kicked off the daily scheduled updating of this report. The first import was an update of the event participant list, which had to be manually exported to a google sheet every morning (to reflect shift status updates and newly scheduled shifts). The second import was part of a weekly updated VAN export for all people in the My Campaign side of VAN who belonged to each organizing region.
-
-#### SQL Queries
-
-The workhorse query of this process is the va02_event_participant_moded query which adds the transforms the base event participant list int the following ways:
+## SQL Queries
 
 - Q1: create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd)
-- Adds the latest Field Organizer who *recruited* that particular VAN ID
-- Adds a scheduled boolean value (whether or not that VAN ID is scheduled for a future event)
-- Adds total completed shifts over the course of the cycle (not currently utilized in report)
-- Adds total declined/no show shifts to determine flake rate (not currently utilized in report)
-- Calculates 14 and 30 day rolling counts for how many events a particular VAN ID has completed to calculate status of VAN IDs over time (not currently utilized in report)
-- Creates a "proper_organizer" column that assigns a volunteer to an organizer based on last_recruit (if no assigned organizer exists) or prefers the last recruit in certain special cases
+- Q2: Create descriptive table describing count of cusomters, maximum/minimum/average/standard deviation of total purchase YTD amount aggregated by their preference in email subscription:
+      0 = Contact does not wish to receive e-mail promotions
+      1 = Contact does wish to receive e-mail promotions from AdventureWorks
+      2 = Contact does wish to receive e-mail promotions from AdventureWorks and selected partners
+  It is interesting to observe that the minimum number total purchase year-to-date amount is negative. It could be due to poor cost value of the products or poor monitoring of product causing request of refund.
+- Q3:
+- Q4:
+- Q5:
+- Q6:
+- Q7:
 
 Next, the set_current_status query checks all vanids for how many events they've completed in the last 14 and 30 days, and assigns a status based on the count. Currently it is set up as follows:
 
