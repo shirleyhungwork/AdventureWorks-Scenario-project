@@ -4,7 +4,7 @@ Q2: Create descriptive table describing count of cusomters, maximum/minimum/aver
 1 = Contact does wish to receive e-mail promotions from AdventureWorks
 2 = Contact does wish to receive e-mail promotions from AdventureWorks and selected partners
 
-Extract attributes from table Person.person, HumanResources.employee, Purchasing.Vendor
+Extract attributes from table Person.person, Sales.Customer
 using column 'BusinessEntityId' as key
 */
 
@@ -16,13 +16,11 @@ with customer as (
 		   ARRAY[ARRAY['IndividualSurvey', 'http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/IndividualSurvey']])::text[])[1]::Decimal(12,5) as TotalPurchaseYTD
 	
 	from person.person p 
-	left join humanresources.employee em
-	on p.businessentityid = em.businessentityid
-	left join Purchasing.Vendor v
-	on p.businessentityid = v.businessentityid
+	left join Sales.Customer s
+	on p.businessentityid = s.PersonID
 	
 	--To exclude those that are employee / vendor 
-	where em.businessentityid is null and v.businessentityid is null
+	where s.CustomerID is not null
 ) 
 	
 select emailpromotion, count(1) as CountOfPerson, 
