@@ -64,15 +64,20 @@ The process for building this report was as follows (and can be viewed in the ya
 
 ## SQL Queries
 
-- Q1: create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd)
+- Q1: Create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd).
 - Q2: Create descriptive table describing count of cusomters, maximum/minimum/average/standard deviation of total purchase YTD amount aggregated by their preference in email subscription:
+  
       0 = Contact does not wish to receive e-mail promotions
+  
       1 = Contact does wish to receive e-mail promotions from AdventureWorks
+  
       2 = Contact does wish to receive e-mail promotions from AdventureWorks and selected partners
+  
   It is interesting to observe that the minimum number total purchase year-to-date amount is negative. It could be due to poor cost value of the products or poor monitoring of product causing request of refund.
+  
 - Q3:
 - Q4:
-- Q5:
+- Q5: List top 10 sales person's demographic having highest growth in sales comparing to last year and calculate the projected net profit received by company if sales person meets the sales quota after excluding commission and bonus.
 - Q6:
 - Q7:
 
