@@ -1,5 +1,5 @@
 /*
-Q2: Create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd, preference to receive receive e-mail promotions)
+Q1: Create list of customer demographic (i.e. contact number, email address, name, total purchase price ytd, preference to receive receive e-mail promotions)
 Extract attributes from table Person.person, Person.EmailAddress, Person.Personphone, HumanResources.employee
 using column 'BusinessEntityId' as key
 */
