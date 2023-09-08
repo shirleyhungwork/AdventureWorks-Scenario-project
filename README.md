@@ -1,93 +1,86 @@
-# AdventureWorks database project
- Analyse AdventureWorks database using Postgresql
-
-# 📀 DVD Rental PostgreSQL Project 📀
+# Adventure Works Cycles Business Scenario Project
 <p align="center">
   <img src="https://i0.wp.com/blog.jpries.com/wp-content/uploads/2015/12/AdventureWorks-Logo_blog.jpg" alt="Image" width="600">
 </p>
 
-## 📚 Introduction
+## Introduction
 
-This project encapsulates 15 meticulously designed tables: 'actor', 'film', 'film_actor', 'category', 'film_category', 'store', 'inventory', 'rental', 'payment', 'staff', 'customer', 'address', 'city', and 'country'. Each table represents various facets of a real-world DVD rental business. 📊
+AdventureWorks is a sample database provided by Microsoft SQL Server, which supports standard online transaction processing scenarios for Adventure Works Cycles, a fictitious bicycle manufacturer that produces and sells metal and composite bicycles to worldwide. There are a total of 68 tables in the sample database constituted by 9 scenarios (i.e. Business Entities, People, Human Resources, Products, Manufacturing, Purchasing, Inventory, Sales, and Admin). Knowing that customers' demographic and sales-related information are crucial for driving business strategy in real life, this project aims to implement SQL querying techniques in PostgreSQL to explore, manipulate data in "People" and "Sales" scenarios, and transform it into useful business report.
 
-As you navigate through this project, you'll gain practical insights into the capabilities of PostgreSQL, refine your database management skills, and understand complex data structures and relationships. Welcome to a learning journey that unravels the intricate operations of a DVD rental store. 🚀
+## People Scenario Tables (Schema "Person")
+This schema consists of names and addresses of individual customers, vendors, and employees. There are 13 tables in this schema:
 
-## 🎯 Objective
-- Implement SQL querying techniques to explore and manipulate the data.
-- Utilize PostgreSQL database system for managing and interacting with the data.
-- Leverage Git commands for version control and effective collaboration.
-- Maintain comprehensive project documentation and a well-structured code repository here on GitHub.
+1.		Person.Address
+2.		Person.AddressType
+3.		Person.BusinessEntity
+4.		Person.BusinessEntityAddress
+5.		Person.BusinessEntityContact
+6.		Person.ContactType
+7.		Person.CountryRegion
+8.		Person.EmailAddress
+9.		Person.Password
+10.		Person.Person
+11.		Person.PersonPhone
+12.		Person.PhoneNumberType
+13.		Person.StateProvince
+
+## Sales Scenario Tables (Schema "Sales")
+This schema contains information about shopping cart, sales orders, special offers and sales people. There are 19 tables in this schema:
+
+1.		Sales.CountryRegionCurrency
+2.		Sales.CreditCard
+3.		Sales.Currency
+4.		Sales.CurrencyRate
+5.		Sales.Customer
+6.		Sales.PersonCreditCard
+7.		Sales.SalesOrderDetail
+8.		Sales.SalesOrderHeader
+9.		Sales.SalesOrderHeaderSalesReason
+10.		Sales.SalesPerson
+11.		Sales.SalesPersonQuotaHistory
+12.		Sales.SalesReason
+13.		Sales.SalesTaxRate
+14.		Sales.SalesTerritory
+15.		Sales.SalesTerritoryHistory
+16.		Sales.ShoppingCartItem
+17.		Sales.SpecialOffer
+18.		Sales.SpecialOfferProduct
+19.		Sales.Store
+
+## The Workflow
+
+The process for building this report was as follows (and can be viewed in the yaml file in the repo):
 
 
-## 🔧 Tool
-- PostgreSQL (Version: 15.3)
-- Git (Version: 2.23.0)
+#### Imports
 
-## 📊 DVD Rental ER Model
-<p align="center">
-  <img src="https://github.com/gordonkwokkwok/DVD-Rental-PostgreSQL-Project/assets/112631794/5c55cbde-9e67-4363-99bc-177bf7903882" alt="Image" width="700">
-</p>
+Using the Civis platform, two imports kicked off the daily scheduled updating of this report. The first import was an update of the event participant list, which had to be manually exported to a google sheet every morning (to reflect shift status updates and newly scheduled shifts). The second import was part of a weekly updated VAN export for all people in the My Campaign side of VAN who belonged to each organizing region.
 
-## 📃 DVD Rental Database Tables
-There are 15 tables in the DVD Rental database:
+#### SQL Queries
 
-- actor – stores actors data including first name and last name.
-- film – stores film data such as title, release year, length, rating, etc.
-- film_actor – stores the relationships between films and actors.
-- category – stores film’s categories data.
-- film_category- stores the relationships between films and categories.
-- store – contains the store data including manager staff and address.
-- inventory – stores inventory data.
-- rental – stores rental data.
-- payment – stores customer’s payments.
-- staff – stores staff data.
-- customer – stores customer data.
-- address – stores address data for staff and customers
-- city – stores city names.
-- country – stores country names.
+The workhorse query of this process is the va02_event_participant_moded query which adds the transforms the base event participant list int the following ways:
 
-## 🌐 Dataset
-- [Link](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) ; or
-- [Download Here](https://github.com/gordonkwokkwok/DVD-Rental-PostgreSQL-Project/tree/main/dataset)
+- Adds the turfed Field Organizer (from the organizing region import) to each VAN ID entry
+- Adds the latest Field Organizer who *recruited* that particular VAN ID
+- Adds a scheduled boolean value (whether or not that VAN ID is scheduled for a future event)
+- Adds total completed shifts over the course of the cycle (not currently utilized in report)
+- Adds total declined/no show shifts to determine flake rate (not currently utilized in report)
+- Calculates 14 and 30 day rolling counts for how many events a particular VAN ID has completed to calculate status of VAN IDs over time (not currently utilized in report)
+- Creates a "proper_organizer" column that assigns a volunteer to an organizer based on last_recruit (if no assigned organizer exists) or prefers the last recruit in certain special cases
 
-📝 To restore a .tar file in pgAdmin, follow these steps:
-```
-1. First, you need to convert the dvdrental.zip file into a dvdrental.tar file. You can use a compression tool like 7-Zip or WinRAR to extract the contents of the dvdrental.zip file. Once extracted, you can create a new archive and save it as dvdrental.tar.
+Next, the set_current_status query checks all vanids for how many events they've completed in the last 14 and 30 days, and assigns a status based on the count. Currently it is set up as follows:
 
-2. Open pgAdmin and connect to your PostgreSQL database server.
+- Super Active: at least 2 completed shifts in the last 14 days
+- Active: less than 2 completed shifts in the last 14 days, at least 2 completed in the last 30 days
+- Almost Active: 1 completed  shift in the last 30 days
+- Drop Off: Has once signed up, but has not completed a shift in the last 30 days
 
-3. In the left column of pgAdmin, locate the "Servers" group and expand it. Then expand the server you want to restore the dvdrental.tar file to.
+## Tool
+- PostgreSQL (Version: 16.RC1)
 
-4. Right-click on the "Databases" option under the server and select "Restore..." from the context menu.
+## Dataset
+- [Link](https://github.com/lorint/AdventureWorks-for-Postgres)
 
-5. In the "Restore" dialog box, navigate to the location where you have the dvdrental.tar file saved. Select the file and click on the "OK" or "Open" button to start the restore process.
+## Author
+- [Shirley Hung](www.linkedin.com/in/shirley-hung-54a749229)
 
-6. Configure the restore options as needed. You can specify the target database, choose whether to drop existing objects, set the format to "Custom or Tar," and adjust other options according to your requirements.
-
-7. Click the "Restore" button to initiate the restore process. pgAdmin will read the dvdrental.tar file and restore the database schema and data accordingly.
-
-8. Once the restore process completes, you should see a success message indicating that the restore was successful.
-```
-By following these steps, you will be able to restore the dvdrental.tar file in pgAdmin and have the database available for use.
-
-## 👥 Contributer
-- [Gordon Kwok](https://www.linkedin.com/in/gordonkwokch/)
-
-## 🤝 Acknowledgments
-
-I would like to express our gratitude to the following individuals and organizations for their contributions and support in making this project possible:
-
-- Will: an instructor of the course, provided valuable guidance, mentorship, and expertise throughout the project. His support was instrumental in shaping the direction of the project and ensuring its success.
-- [Cantek IT Program](https://www.cantekcanada.com/): Cantek IT Program, an educational institution, played a significant role in supporting the project. They provided resources, facilities, and a conducive learning environment for the team to work on the project.
-- [PostgreSQL Tutorial Website](https://www.postgresqltutorial.com/): The PostgreSQL Tutorial website offered a valuable contribution by providing a dataset sample. This dataset was instrumental in conducting various experiments, analyses, and demonstrations throughout the project.
-
-I am thankful for their valuable input, feedback, and assistance throughout the development process. Their expertise and dedication have greatly enhanced the quality and functionality of this project.
-
-## 💪 Support
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gordonhei25)
-
-Give a ⭐️ if this project helped you!
-
-<p>
-  <img src="https://github.com/gordonkwokkwok/DVD-Rental-PostgreSQL-Project/assets/112631794/04df4208-da1b-4c88-b18d-d711c0785d31" alt="Alt Text" width="260">
-</p>
