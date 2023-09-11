@@ -57,10 +57,6 @@ Entity Relationship diagram is shown below:
   <img src="ERD/Sales.jpg" alt="Image" width="600">
 </p>
 
-## The Workflow
-
-The process for building this report was as follows (and can be viewed in the yaml file in the repo):
-
 
 ## SQL Queries
 
